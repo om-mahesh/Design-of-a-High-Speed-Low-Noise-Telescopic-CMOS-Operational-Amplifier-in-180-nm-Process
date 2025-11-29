@@ -59,7 +59,7 @@ The telescopic amplifier consists of:
 - Unity Gain Bandwidth: 1.01 GHz
 - Phase Margin: 85°
 
-![Gain-Phase Plot](gain_phase_plot.png)
+![Gain-Phase Plot](simulation_results/gain_phase_plot.png)
 
 
 ![Slew Rate](slew_rate_plot.png)
