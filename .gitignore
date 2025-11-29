@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.temp
+*_temp.*
+*_clean.*
+*_cleaned.*
+*_new.*
+extracted_image_*.png
+
+# Scripts (cleanup scripts)
+clean_*.py
+extract_*.py
+restore_*.py
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cadence
+*.log.*
+*.err
+*.out
+*.cdslck
+.*.cdslck
+*.cdslck.RHEL30.*.
+cdsinfo
+history
+artist_logs/
+
+# Backup files
+*.bak
+*.backup
+*~
+

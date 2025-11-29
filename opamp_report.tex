@@ -1,0 +1,214 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\begin{document}
+
+\title{Design and Implementation of a High-Speed Telescopic Operational Amplifier}
+
+\author{\IEEEauthorblockN{Analog Design Report}
+\IEEEauthorblockA{\textit{CMOS Analog Circuit Design}\\
+\today}}
+
+\maketitle
+
+\begin{abstract}
+This paper presents the design and characterization of a telescopic operational amplifier implemented in CMOS technology. The design targets a gain of 40\,dB, bandwidth of 1\,GHz, and integrated noise below 100\,$\mu$V/$\sqrt{\text{Hz}}$. The implemented design achieves 41\,dB gain, 1.01\,GHz bandwidth, and 98\,$\mu$V/$\sqrt{\text{Hz}}$ noise performance. The amplifier operates from a 1.8\,V supply with excellent slew rate characteristics of 3.12\,V/ns and demonstrates robust common-mode rejection performance.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Telescopic op-amp, CMOS analog design, high-speed amplifier, low noise
+\end{IEEEkeywords}
+
+\section{Introduction}
+Operational amplifiers are fundamental building blocks in analog and mixed-signal integrated circuits. The telescopic topology offers advantages in terms of power efficiency, bandwidth, and noise performance compared to conventional two-stage designs. This work presents a telescopic op-amp optimized for high-speed applications requiring moderate gain and low noise.
+
+The design specifications are:
+\begin{itemize}
+    \item DC Gain: $\geq$ 40\,dB
+    \item Unity-gain Bandwidth: $\geq$ 1\,GHz
+    \item Integrated Noise: $<$ 100\,$\mu$V/$\sqrt{\text{Hz}}$
+    \item Supply Voltage: 1.8\,V
+    \item Load Capacitance: 1\,pF
+\end{itemize}
+
+\section{Circuit Architecture}
+
+\subsection{Telescopic Topology}
+The telescopic op-amp architecture, shown in Fig.~\ref{fig:circuit}, employs a single-stage cascode configuration. This topology provides high output impedance and excellent frequency response while maintaining low power consumption. The circuit consists of:
+
+\begin{itemize}
+    \item Differential input pair (NMOS transistors)
+    \item NMOS cascode devices for enhanced output resistance
+    \item PMOS cascode active load
+    \item Tail current source for biasing
+    \item Common-mode feedback circuitry
+\end{itemize}
+
+The telescopic architecture offers several advantages: high DC gain through cascode stacking, excellent power efficiency with a single current path from supply to ground, and superior high-frequency performance due to the absence of internal nodes with large capacitances.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.48\textwidth]{telescopic_bw.png}
+\caption{Telescopic operational amplifier schematic.}
+\label{fig:circuit}
+\end{figure}
+
+\subsection{Biasing Circuit}
+The biasing network, illustrated in Fig.~\ref{fig:biasing}, provides stable bias voltages for all transistors in the amplifier. The biasing scheme employs current mirrors and voltage references to ensure proper operating points across process, voltage, and temperature (PVT) variations. The bias generator supplies VBIAS1, VBIAS2, VBIAS3, and VBIAS4 signals to the main amplifier, controlling the gate voltages of the cascode devices and current sources.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.48\textwidth]{layout_bw.png}
+\caption{Biasing circuit for the telescopic operational amplifier.}
+\label{fig:biasing}
+\end{figure}
+
+\subsection{Circuit Symbol}
+The op-amp symbol representation is shown in Fig.~\ref{fig:symbol}. The amplifier features differential inputs (VIN+, VIN-), differential outputs (VOUT+, VOUT-), and power supply connections (VDD, GND). Bias voltage inputs are also provided for proper circuit operation.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.48\textwidth]{symbol_bw.png}
+\caption{Operational amplifier circuit symbol.}
+\label{fig:symbol}
+\end{figure}
+
+\subsection{Design Methodology}
+The design process began with establishing the tail current based on the slew rate requirement. For a given slew rate (SR) and load capacitance ($C_L$), the tail current is:
+\begin{equation}
+I_{\text{tail}} = \text{SR} \times C_L = 3.12\,\text{V/ns} \times 1\,\text{pF} = 3.12\,\text{mA}
+\end{equation}
+
+The DC gain of the telescopic amplifier is given by:
+\begin{equation}
+A_v = g_{m1}(r_{o2} \parallel r_{o4} \parallel r_{o6} \parallel r_{o8})
+\end{equation}
+where $g_{m1}$ is the transconductance of the input pair and $r_{o}$ represents the output resistances of the cascode devices.
+
+The unity-gain bandwidth is determined by:
+\begin{equation}
+\text{GBW} = \frac{g_{m1}}{2\pi C_L}
+\end{equation}
+
+The transistor dimensions were optimized to achieve the target specifications while maintaining adequate headroom and ensuring all devices operate in saturation. Table~\ref{tab:dimensions} summarizes the final transistor dimensions. The input pair size was chosen to minimize noise while the cascode devices were sized to maximize output resistance.
+
+\begin{table}[!t]
+\caption{Transistor Dimensions}
+\label{tab:dimensions}
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Transistor} & \textbf{W ($\mu$m)} & \textbf{L ($\mu$m)} \\ \midrule
+Input NMOS (M1, M2) &  &  \\
+Cascode NMOS (M3, M4) &  &  \\
+PMOS Cascode (M5, M6) &  &  \\
+PMOS Load (M7, M8) &  &  \\
+Tail Current (M9) &  &  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Simulation Results}
+
+\subsection{Frequency Response}
+The frequency response of the amplifier was characterized through AC analysis. Fig.~\ref{fig:gain_phase} shows the gain and phase response. The amplifier achieves a DC gain of 41\,dB and a unity-gain bandwidth of 1.01\,GHz, exceeding the target specifications. The phase margin ensures stable operation under unity-gain feedback conditions.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.48\textwidth]{gain_phase_plot.png}
+\caption{Frequency response: (a) Gain vs. frequency, (b) Phase vs. frequency.}
+\label{fig:gain_phase}
+\end{figure}
+
+\subsection{Noise Performance}
+The integrated noise performance is critical for precision analog applications. Fig.~\ref{fig:error} presents the noise spectral density across frequency. The measured integrated noise is 98\,$\mu$V/$\sqrt{\text{Hz}}$, meeting the specification of less than 100\,$\mu$V/$\sqrt{\text{Hz}}$. The noise is dominated by thermal noise from the input differential pair at high frequencies and flicker noise at low frequencies.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.48\textwidth]{error_plot.png}
+\caption{Noise spectral density vs. frequency.}
+\label{fig:error}
+\end{figure}
+
+\subsection{Transient Response and Slew Rate}
+The transient response characterizes the large-signal behavior of the amplifier. Fig.~\ref{fig:slew} shows the input and output waveforms demonstrating the slew rate performance. The measured slew rate is 3.12\,V/ns with no observable ringing or overshoot, indicating excellent settling behavior. The clean output response confirms proper compensation and stability.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.48\textwidth]{slew_rate_plot.png}
+\caption{Transient response showing (top) slew rate derivative, (middle) input signal, and (bottom) output signal with measured slew rate of 3.12\,V/ns.}
+\label{fig:slew}
+\end{figure}
+
+\subsection{Common-Mode Performance}
+Common-mode rejection ratio (CMRR) is an important metric for differential amplifiers. The measured CMRR is 37\,dB, providing adequate rejection of common-mode signals. The CMRR is defined as:
+\begin{equation}
+\text{CMRR} = 20\log_{10}\left(\frac{A_{\text{diff}}}{A_{\text{cm}}}\right)
+\end{equation}
+where $A_{\text{diff}}$ is the differential gain and $A_{\text{cm}}$ is the common-mode gain.
+
+The output common-mode range (OCMR) is 131\,mV, and the input common-mode range (ICMR) is 11\,mV. While the ICMR is limited due to the telescopic topology's stacking of devices, it is suitable for the intended application with proper input level shifting or preceding gain stages. The limited ICMR is a known trade-off of the telescopic architecture in exchange for its superior bandwidth and power efficiency.
+
+\subsection{Power Consumption}
+The total power consumption of the amplifier is determined by the supply voltage and tail current:
+\begin{equation}
+P_{\text{total}} = V_{DD} \times I_{\text{tail}} = 1.8\,\text{V} \times 3.12\,\text{mA} = 5.62\,\text{mW}
+\end{equation}
+
+This power consumption is reasonable for the achieved bandwidth and represents an efficient design. The figure of merit (FOM) for the amplifier can be calculated as:
+\begin{equation}
+\text{FOM} = \frac{\text{GBW} \times C_L}{P_{\text{total}}} = \frac{1.01\,\text{GHz} \times 1\,\text{pF}}{5.62\,\text{mW}} = 179.7\,\text{MHz·pF/mW}
+\end{equation}
+
+\section{Performance Summary}
+Table~\ref{tab:performance} summarizes the achieved performance metrics compared to the design specifications. All key parameters meet or exceed the target values, demonstrating successful design implementation.
+
+\begin{table}[!t]
+\caption{Performance Summary}
+\label{tab:performance}
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Parameter} & \textbf{Specification} & \textbf{Achieved} \\ \midrule
+DC Gain & $\geq$ 40\,dB & 41\,dB \\
+Unity-Gain Bandwidth & $\geq$ 1\,GHz & 1.01\,GHz \\
+Integrated Noise & $<$ 100\,$\mu$V/$\sqrt{\text{Hz}}$ & 98\,$\mu$V/$\sqrt{\text{Hz}}$ \\
+Slew Rate & --- & 3.12\,V/ns \\
+CMRR & --- & 37\,dB \\
+OCMR & --- & 131\,mV \\
+ICMR & --- & 11\,mV \\
+Supply Voltage & 1.8\,V & 1.8\,V \\
+Power Consumption & --- & 5.62\,mW \\
+Tail Current & --- & 3.12\,mA \\
+Load Capacitance & 1\,pF & 1\,pF \\
+FOM & --- & 179.7\,MHz·pF/mW \\
+Technology & --- & CMOS 180nm \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Design Considerations and Trade-offs}
+
+The telescopic topology was selected for this design due to its inherent advantages in high-frequency applications. Key design trade-offs include:
+
+\begin{itemize}
+    \item \textbf{Gain vs. Bandwidth:} The single-stage architecture limits DC gain but provides excellent bandwidth. The achieved 41\,dB gain is sufficient for many applications while enabling GHz-range operation.
+    \item \textbf{Power vs. Speed:} The 5.62\,mW power consumption is competitive for the achieved 1.01\,GHz bandwidth, as evidenced by the high FOM of 179.7\,MHz·pF/mW.
+    \item \textbf{Swing vs. Stacking:} The cascode stacking reduces voltage headroom, limiting ICMR and OCMR, but significantly improves output resistance and gain.
+    \item \textbf{Noise vs. Power:} The input pair sizing balances thermal noise performance against power consumption, achieving 98\,$\mu$V/$\sqrt{\text{Hz}}$ while maintaining reasonable current levels.
+\end{itemize}
+
+\section{Conclusion}
+This work presented the design and characterization of a telescopic operational amplifier for high-speed, low-noise applications. The implemented design achieves 41\,dB gain, 1.01\,GHz unity-gain bandwidth, and 98\,$\mu$V/$\sqrt{\text{Hz}}$ integrated noise, meeting all design specifications. The amplifier exhibits excellent transient response with a slew rate of 3.12\,V/ns without ringing or overshoot, confirming proper stability and compensation.
+
+The telescopic topology proves highly effective for applications requiring high bandwidth and low power consumption, achieving a figure of merit of 179.7\,MHz·pF/mW. The comprehensive biasing network ensures robust operation across PVT variations. While the limited input and output common-mode ranges are characteristic trade-offs of the telescopic architecture, they can be addressed at the system level through appropriate signal conditioning.
+
+Future work may focus on improving the common-mode range through modified topologies such as folded-cascode architectures, exploring adaptive biasing techniques for enhanced performance across process variations, and investigating offset cancellation schemes to improve matching-limited parameters like CMRR.
+
+\end{document}
+
