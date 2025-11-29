@@ -170,9 +170,7 @@ This project is available for educational and research purposes.
 
 ## 🙏 Acknowledgments
 
-- TSMC for the 180nm process technology
-- [Your Institution/University]
-- [Advisor/Professor name if applicable]
+- HCL for the 180nm process technology
 
 ---
 
