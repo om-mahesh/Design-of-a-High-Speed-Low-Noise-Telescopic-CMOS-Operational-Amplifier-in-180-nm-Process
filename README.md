@@ -62,11 +62,11 @@ The telescopic amplifier consists of:
 ![Gain-Phase Plot](simulation_results/gain_phase_plot.png)
 
 
-![Slew Rate](slew_rate_plot.png)
+![Slew Rate](simulation_results/slew_rate_plot.png)
 
 ### Noise Analysis
 - Input-referred noise at 1kHz: 100 uV/√Hz
-![Error/Noise Plot](error_plot.png)
+![Error/Noise Plot](simulation_results/error_plot.png)
 
 ### Layout
 The complete layout includes:
@@ -75,8 +75,6 @@ The complete layout includes:
 - Guard rings for isolation
 - Metal routing with minimal parasitic
 
-![Layout](layout.png)
-![Layout (BW)](layout_bw.png)
 
 ## 📁 Repository Structure
 
