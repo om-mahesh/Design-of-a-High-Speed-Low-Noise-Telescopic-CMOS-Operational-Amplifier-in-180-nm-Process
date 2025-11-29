@@ -27,16 +27,14 @@ The telescopic architecture is chosen for its excellent high-frequency performan
 | Parameter | Value |
 |-----------|-------|
 | **Technology** | 180 nm CMOS |
-| **Supply Voltage (VDD)** | [To be specified] |
-| **Gain** | [Value] dB |
-| **Bandwidth** | [Value] MHz/GHz |
-| **Phase Margin** | [Value]° |
-| **Slew Rate** | [Value] V/µs |
-| **Power Consumption** | [Value] mW |
-| **Input-Referred Noise** | [Value] nV/√Hz |
-| **CMRR** | [Value] dB |
-| **PSRR** | [Value] dB |
-
+| **Supply Voltage (VDD)** | 1.8V |
+| **Gain** | 40 dB |
+| **Bandwidth** | 1 GHz |
+| **Phase Margin** | 85° |
+| **Slew Rate** | 3.12 V/ns |
+| **Power Consumption** | 5.12 mW |
+| **Input-Referred Noise** | 100 uV/√Hz |
+| **CMRR** | 37 dB |
 ## 🏗️ Design Architecture
 
 ### Circuit Topology
@@ -57,23 +55,17 @@ The telescopic amplifier consists of:
 ## 📊 Simulation Results
 
 ### Gain and Phase Response
-- DC Gain: [Value] dB
-- Unity Gain Bandwidth: [Value] MHz
-- Phase Margin: [Value]°
+- DC Gain: 41 dB
+- Unity Gain Bandwidth: 1.01 GHz
+- Phase Margin: 85°
 
 ![Gain-Phase Plot](gain_phase_plot.png)
 
-### Transient Analysis
-- Slew Rate (Rising): [Value] V/µs
-- Slew Rate (Falling): [Value] V/µs
-- Settling Time: [Value] ns
 
 ![Slew Rate](slew_rate_plot.png)
 
 ### Noise Analysis
-- Input-referred noise at 1kHz: [Value] nV/√Hz
-- Total integrated noise: [Value] µV (RMS)
-
+- Input-referred noise at 1kHz: 100 uV/√Hz
 ![Error/Noise Plot](error_plot.png)
 
 ### Layout
